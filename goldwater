@@ -1,6 +1,14 @@
 ## Probabilities
 ## browndict is the counts of the Brown corpus
+for word in brown.words():
+	if word not in browndict:
+		browndict[word]=1
+	else:
+		browndict[word]=browndict[word]+1
+
+
 ## brownprobs is a dict with frequencies
+rownprobs={k:float(v)/total for (k,v) in browndict.items()}
 
 #MLE
 def calcprob (data):
@@ -25,6 +33,16 @@ def calcprob (data):
 		#print "probability of one word", oneprob
 	finalprob=numpy.product(probs)
 	print "probability:", finalprob
+	
+#bigrams
+
+def bigrammer(listofwords):
+	bigrams=[]
+	for i in range(len(listofwords)-1):
+		bigrams.append((listofwords[i], listofwords[i+1]))
+	return bigrams
+	
+
 	
 	
 	
