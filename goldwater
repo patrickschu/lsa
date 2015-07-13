@@ -1,0 +1,30 @@
+## Probabilities
+## browndict is the counts of the Brown corpus
+## brownprobs is a dict with frequencies
+
+#MLE
+def calcprob (data):
+	dataprobs=[brownprobs[i] for i in data]
+	finalprob=numpy.product(dataprobs)
+	print "probability:", finalprob
+
+
+
+
+## add one without frequency correction
+
+def calcprob (data):
+	probs=[]
+	oneprob=[brownprobs[i] for i in browndict if browndict[i]==1][0]
+	for d in data:
+		try:
+			d=browndicti[d]
+		except:
+			d=oneprob
+		probs.append(d)
+		#print "probability of one word", oneprob
+	finalprob=numpy.product(probs)
+	print "probability:", finalprob
+	
+	
+	
