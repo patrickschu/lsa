@@ -42,6 +42,12 @@ def bigrammer(listofwords):
 		bigrams.append((listofwords[i], listofwords[i+1]))
 	return bigrams
 	
+#better bigrams
+
+def bigrammer2(listofwords):
+	print listofwords[1:]
+	return zip(listofwords, listofwords[1:])
+	
 
 	
 	
