@@ -48,6 +48,90 @@ def bigrammer2(listofwords):
 	print listofwords[1:]
 	return zip(listofwords, listofwords[1:])
 	
+##bigram dictionary
+
+for cat in brown.categories():
+	corpus=brown.words(categories=str(cat))
+	print "category", cat
+	print len(corpus)
+	bigrams=bigrammer2(corpus)
+	print "bigrams", len(bigrams)
+	for bigram in bigrams:
+		if bigram not in brownbigrams:
+			brownbigrams[bigram]=1
+		else:
+			brownbigrams[bigram]=brownbigrams[bigram]+1
+
+#try the turing
+possiblebigrams=pow(len(browndict),2)
+totalbigrams=sum(brownbigrams.values())
+zerobigrams=possiblebigrams-totalbigrams
+
+bins={}
+for item in brownbigrams:
+	if brownbigrams[item] not in bins:
+		bins[brownbigrams[item]] =1
+	else:
+		bins[brownbigrams[item]] =bins[brownbigrams[item]]+1
+	
+def turingformula(count):
+	print "bins c+1", bins[count+1]
+	print "bins c", bins[count]
+	adjustedcount=(count+1)*((float(bins[count+1])/float(bins[count])))
+	print adjustedcount
+
+#adjusting counts
+for item in brownbigrams:
+	if brownbigrams[item] < 6:
+		adjustedbrown[item]=turingformula(brownbigrams[item])
+	else:
+		adjustedbrown[item]=brownbigrams[item]
+
+		
+	
+#why this?
+sum(adjustedbrown.values())+zerobigrams
+3142072466.999996
+>>> possiblebigrams
+3142387249L
+
+
+ 
+def bigramcalcprob (data):
+	probs=[]
+	zeroprob=probofzero/zerobigrams
+	totalbigrams=float(sum(brownbigrams.values()))
+	bigrams=bigrammer2(data)
+	for d in bigrams:
+		#print d
+		try:
+			d=adjustedbrown[d]/totalbigrams
+			#print d, adjusteddicti[d]
+		except:
+			print d, "assi"
+			d=zeroprob
+		probs.append(d)
+	#print probs
+	#print "probability of one word", oneprob
+	finalprob=numpy.product(probs)
+	print "probability:", finalprob
+	t=sorted(probs, reverse=True)
+	print t[0]
+	#print t
+	#for item in range(0,len(t)):
+		#print item
+		#print t[item]
+		#print probs.index(t[item])
+		#print bigrams[probs.index(t[item])]
+	#print t[0]
+	#print probs.index(t[0])
+	print "1", bigrams[probs.index(t[0])]
+	print "2", bigrams[probs.index(t[1])]
+	print "3", bigrams[probs.index(t[2])]
+	return finalprob
+	
+
+	
 
 	
 	
